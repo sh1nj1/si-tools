@@ -17,7 +17,7 @@ for line in sys.stdin:
 
 # create csv file
 writer = csv.writer(sys.stdout)
-writer.writerow(["full path", "file name", "commit message", "module"])
+writer.writerow(["module", "full path", "file name", "commit message"])
 
 for file_path in added_files + modified_files:
     # extract file name from path
@@ -31,4 +31,4 @@ for file_path in added_files + modified_files:
         module = file_path.split("/")[0] + "/" + file_path.split("/")[-2]
     else:
         module = ""
-    writer.writerow([file_path, file_name, commit_message, module])
+    writer.writerow([module, file_path, file_name, commit_message])
