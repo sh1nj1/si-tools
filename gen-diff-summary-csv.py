@@ -3,7 +3,10 @@ import os
 import subprocess
 import sys
 import re
+import requests
 from datetime import datetime
+
+stdin = open(sys.argv[1]).readlines() if len(sys.argv) > 1 else sys.stdin
 
 DELIMITER=','
 ENCODING='utf-8-sig'
@@ -17,7 +20,7 @@ modified_files = []
 added_files = []
 
 # parse git diff file
-for line in sys.stdin:
+for line in stdin:
     if line.startswith("+++ b/"):
         # extract added file path
         added_files.append(line.split("+++ b/")[1].strip())
