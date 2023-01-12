@@ -32,7 +32,7 @@ for line in stdin:
 writer = csv.writer(sys.stdout, delimiter = DELIMITER, quoting = csv.QUOTE_ALL)
 writer.writerow(COLUMNS)
 
-for file_path in added_files + modified_files:
+for file_path in set(added_files + modified_files):
     # extract file name from path
     file_name = re.search(r"[^/]*$", file_path).group()
     # get last commit message for file
