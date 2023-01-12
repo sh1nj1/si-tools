@@ -1,5 +1,5 @@
 import csv
-import re
+import os
 import subprocess
 import sys
 import re
@@ -7,6 +7,8 @@ from datetime import datetime
 
 DELIMITER=','
 ENCODING='utf-8-sig'
+COLUMNS = (os.getenv("COLUMNS") or "module,full path, filename, deploy date").split(",")
+
 
 sys.stdout.reconfigure(encoding = ENCODING)
 today = datetime.today().strftime('%Y-%m-%d')
@@ -25,7 +27,7 @@ for line in sys.stdin:
 
 # create csv file
 writer = csv.writer(sys.stdout, delimiter = DELIMITER, quoting = csv.QUOTE_ALL)
-writer.writerow(["module", "full path", "file name", "commit message", "deploy date"])
+writer.writerow(COLUMNS)
 
 for file_path in added_files + modified_files:
     # extract file name from path
