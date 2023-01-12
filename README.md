@@ -1,50 +1,51 @@
-# Git Diff to CSV
-
-## Description
-
-This script parses the output of a git diff command, extracts the modified and
-added files with full path from the root, and creates a csv file with the following
-columns:
-
-```
-● "module" which is the first path of the file and the last word of that path
-● "full path" which is the full path of the file from the root
-● "file name" which is the name of the file
-● "commit message" which is the last commit message for the file.
-```
-The commit message column is cut to 80 characters if it's longer, and the charset is
-assumed to be UTF-8.
-
-## Usage
-
-Make sure you're in the git repository directory before running the script.
-
-You can run the script using the following command:
-
-Copy code
-
-git diff--name-only--diff-filter=ACMRTUXB | pythonscript.py> path/to/csv/file
-
-This command will pipe the output of the git diff command to the script and
-redirect the output to a csv file at the specified path.
-
-Please note that this script assumes that you have git installed on your system and
-available in PATH.
-
-## Additional Note
-
-You can make changes to the script as per your requirement, for example if you
-want to extract different columns or if you want to extract data from other source.
+# Git Diff를 CSV로
 
 
-## Troubleshooting
+git diff 로 부터 특정 보고를 위한 엑셀을 만들때 사용할 수 있다.
 
-In case of any issues, please check the stdout for error messages and make sure
-that you're in a git repository directory before running the script.
 
-## Author
+## 설명
+
+이 스크립트는 git diff 명령의 출력을 구문 분석하고 수정된
+루트에서 전체 경로로 파일을 추가하고 다음을 사용하여 csv 파일을 만듭니다.
+열:
+
+
+* 파일의 첫 번째 경로이자 해당 경로의 마지막 단어인 "module"
+* 루트에서 파일의 전체 경로인 "전체 경로"
+* 파일 이름인 '파일 이름'
+* 파일에 대한 마지막 커밋 메시지인 "커밋 메시지".
+
+커밋 메시지 열은 더 길면 80자로 잘리고 문자셋은
+UTF-8로 가정합니다.
+
+## 용법
+
+스크립트를 실행하기 전에 git 저장소 디렉토리에 있는지 확인하십시오.
+
+다음 명령을 사용하여 스크립트를 실행할 수 있습니다.
+
+코드 복사
+
+git diff "대상 브랜치" | COLUMNS="구분,경로,파일명,사유,QA서버 반영일" python gen-diff-summary-csv.py > diff.csv
+
+이 명령은 git diff 명령의 출력을 스크립트로 파이프하고
+출력을 지정된 경로의 csv 파일로 리디렉션합니다.
+
+이 스크립트는 시스템에 git이 설치되어 있고
+PATH에서 사용할 수 있습니다.
+
+## 추가 참고 사항
+
+예를 들어 다음과 같은 경우 요구 사항에 따라 스크립트를 변경할 수 있습니다.
+다른 열을 추출하거나 다른 소스에서 데이터를 추출하려는 경우.
+
+
+## 문제 해결
+
+문제가 있는 경우 stdout에서 오류 메시지를 확인하고 다음을 확인하십시오.
+스크립트를 실행하기 전에 git 저장소 디렉토리에 있음을 확인하십시오.
+
+## 기여자
 
 OpenAI
-
-
-
