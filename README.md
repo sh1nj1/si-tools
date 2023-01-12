@@ -25,9 +25,16 @@ UTF-8로 가정합니다.
 
 다음 명령을 사용하여 스크립트를 실행할 수 있습니다.
 
-코드 복사
-
+Linux 환경:
+```
 git diff "대상 브랜치" | COLUMNS="구분,경로,파일명,사유,QA서버 반영일" python gen-diff-summary-csv.py > diff.csv
+```
+
+Windows 환경:
+```
+git diff "대상 브랜치" > temp.diff
+python gen-diff-summary-csv.py temp.diff > diff.csv
+```
 
 이 명령은 git diff 명령의 출력을 스크립트로 파이프하고
 출력을 지정된 경로의 csv 파일로 리디렉션합니다.
