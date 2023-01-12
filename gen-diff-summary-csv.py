@@ -27,8 +27,8 @@ for file_path in added_files + modified_files:
     # cut commit message if it's longer than 80 characters
     commit_message = commit_message[:80] + "..." if len(commit_message) > 80 else commit_message
     # extract first path of file and last word of that path
-    if '/' in file_path:
-        module = file_path.split("/")[0] + "/" + file_path.split("/")[-2]
+    if '/' in file_path and '-' in file_path:
+        module = file_path.split("/")[0].split("-")[-1]
     else:
         module = ""
     writer.writerow([module, file_path, file_name, commit_message])
