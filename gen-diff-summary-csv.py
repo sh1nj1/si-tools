@@ -5,7 +5,7 @@ import sys
 import re
 from datetime import datetime
 
-stdin = open(sys.argv[1]).readlines() if len(sys.argv) > 1 else sys.stdin
+stdin = open(sys.argv[1], encoding='utf-8').readlines() if len(sys.argv) > 1 else sys.stdin
 
 DELIMITER=','
 ENCODING='utf-8-sig'
@@ -35,11 +35,11 @@ for file_path in set(added_files + modified_files):
     # extract file name from path
     file_name = re.search(r"[^/]*$", file_path).group()
     # get last commit message for file
-    commit_message = subprocess.run(["git", "log", "-1", "--pretty=%B", file_path], capture_output=True, text=True).stdout.strip()
+    commit_message = subprocess.run(["git", "log", "-1", "--pretty=%B", file_path], capture_output=True, text=True, encoding='utf-8').stdout.strip()
     # cut commit message if it's longer than 80 characters
     commit_message = commit_message[:80] + "..." if len(commit_message) > 80 else commit_message
     # remove some commit message prefix
-    commit_message = re.sub(r"^[0-9]+\s+.+:\s+", "", commit_message)
+    commit_message = re.sub(r"^[0-9]+\s+.+\s{0,}:\s+", "", commit_message)
     # extract first path of file and last word of that path
     if '/' in file_path and '-' in file_path:
         module = file_path.split("/")[0].split("-")[-1]
