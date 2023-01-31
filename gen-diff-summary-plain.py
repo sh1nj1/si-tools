@@ -6,7 +6,7 @@ import re
 import requests
 from datetime import datetime
 
-stdin = open(sys.argv[1]).readlines() if len(sys.argv) > 1 else sys.stdin
+stdin = open(sys.argv[1], encoding='utf-8').readlines() if len(sys.argv) > 1 else sys.stdin
 
 DELIMITER=','
 ENCODING='utf-8-sig'
@@ -40,7 +40,7 @@ for file_path in remove_duplicates(added_files + modified_files):
     if 'src/test' in file_path:
         continue
     # get last commit message for file
-    commit_message = subprocess.run(["git", "log", "-1", "--pretty=%B", file_path], capture_output=True, text=True).stdout.strip()
+    commit_message = subprocess.run(["git", "log", "-1", "--pretty=%B", file_path], capture_output=True, text=True, encoding='utf-8').stdout.strip()
     # cut commit message if it's longer than 80 characters
     commit_message = commit_message[:80] + "..." if len(commit_message) > 80 else commit_message
     # remove some commit message prefix
